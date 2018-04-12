@@ -27,13 +27,9 @@ function getTweets() {
     var params = { screen_name: 'Elisa_Penn18', count: 20 };
 
     client.get("statuses/user_timeline", params, function (error, tweets, response) {
-        console.log(tweets);
-        for (var i = 0; i<tweets.length; i++) {
-            // console.log(tweets.body[0].created_at);
-            // console.log(tweets.body[0].text);
+        // console.log(tweets);
+        for (var i = 0; i < tweets.length; i++) {
             console.log(tweets[i].created_at + " " + tweets[i].text);
-            // console.log(tweets[0].text);
-
         };
     });
 };
@@ -44,12 +40,18 @@ function getSong() {
         song = "The Sign";
     };
 
-    spot.search({ type: "track", query: "song", limit: "1"})
+    spot.search({ type: "track", query: song, limit: 1 })
         .then(function (response) {
             var info = response.tracks.items;
             console.log(info);
-
-            console.log("Artist(s): " + info[0].artists[0].name);
+            // if (info[0].artists.length > 1) {
+            //     for (var i = 0; i < info[0].artists.length; i++) {
+            //         console.log("Artist(s): " + info[0].artists[i].name);
+            //     };
+            // }
+            // else {
+            //     console.log("Artist(s): " + info[0].artists[0].name);
+            // }
 
             // console.log("Song Name: " + info[0].name);
 
