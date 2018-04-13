@@ -68,10 +68,13 @@ function getMovie() {
         movieName = "Mr. Nobody";
     };
     request("http://www.omdbapi.com/?apikey=trilogy&t=" + movieName, function(error, response, body){
-    console.log(body);
-    console.log("Movie Title: " + body.Title);
-    console.log("Year Released: " + body.Released);
-    console.log("IMDB Rating: " + body.Ratings[0].Value);
-    console.log("Rotten Tomatoes Rating: " + body.Ratings[1].Value)
+    // console.log(body);
+    console.log("Movie Title: " + JSON.parse(body).Title);
+    console.log("Year Released: " + JSON.parse(body).Released);
+    console.log("IMDB Rating: " + JSON.parse(body).Ratings[0].Value);
+    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value)
+    console.log("Country: " + JSON.parse(body).Country);
+    console.log("Plot: " + JSON.parse(body).Plot);
+    console.log("Starring: " + JSON.parse(body).Actors)
     })
 }
