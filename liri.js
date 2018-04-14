@@ -4,10 +4,9 @@ var keys = require("./keys.js");
 var twitter = require("twitter");
 var spotify = require("node-spotify-api")
 var request = require("request");
+var fs = require("fs");
 var spot = new spotify(keys.spotify);
 var client = new twitter(keys.twitter);
-
-
 
 switch (process.argv[2]) {
     case "my-tweets":
@@ -77,4 +76,8 @@ function getMovie() {
     console.log("Plot: " + JSON.parse(body).Plot);
     console.log("Starring: " + JSON.parse(body).Actors)
     })
+}
+
+function doIt() {
+    
 }
