@@ -21,7 +21,7 @@ switch (process.argv[2]) {
 
         break;
     case "do-what-it-says":
-
+        doIt();
 };
 
 function getTweets() {
@@ -79,5 +79,13 @@ function getMovie() {
 }
 
 function doIt() {
-    fs.readFile("")
-}
+    fs.readFile("random.txt", "utf8", function(err, data) {
+        if (err){
+            console.log(err);
+        }
+        console.log(data);
+        var bsb = data.split(" ");
+        console.log(bsb);
+        getSong();
+    });
+};
