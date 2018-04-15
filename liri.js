@@ -1,17 +1,8 @@
-// require("dotenv").config();
-
 var getTweets = require("./tweets.js");
 var getSong = require("./spotify.js");
 var getMovie = require("./movies.js");
-var doIt = require("./random.js");
-// var keys = require("./keys.js");
-// var twitter = require("twitter");
-// var spotify = require("node-spotify-api");
-// var request = require("request");
+// var doIt = require("./random.js");
 var fs = require("fs");
-// var moment = require("moment");
-// var spot = new spotify(keys.spotify);
-// var client = new twitter(keys.twitter);
 
 
 function readPrompts(){
@@ -33,6 +24,21 @@ switch (process.argv[2]) {
 };
 };
 
+function doIt() {
+    fs.readFile("random.txt", "utf8", function(err, data) {
+        if (err){
+            console.log(err);
+        }
+        console.log(data);
+        var bsb = data.split(" ");
+        process.argv.pop();
+        for (var i = 0; i<bsb.length; i++) {
+            process.argv.push(bsb[i]);
+        };
+        readPrompts();
+    });
+};
+
 readPrompts();
 
-module.exports = readPrompts;
+// module.exports = readPrompts;
