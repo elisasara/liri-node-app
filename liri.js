@@ -5,13 +5,17 @@ var twitter = require("twitter");
 var spotify = require("node-spotify-api")
 var request = require("request");
 var fs = require("fs");
+var moment = require("moment");
 var spot = new spotify(keys.spotify);
 var client = new twitter(keys.twitter);
 
+
+function readPrompts(){
 switch (process.argv[2]) {
     case "my-tweets":
         getTweets();
         break;
+
     case "spotify-this-song":
         getSong();
 
@@ -23,14 +27,14 @@ switch (process.argv[2]) {
     case "do-what-it-says":
         doIt();
 };
+};
 
 function getTweets() {
     var params = { screen_name: 'Elisa_Penn18', count: 20 };
 
     client.get("statuses/user_timeline", params, function (error, tweets, response) {
-        // console.log(tweets);
         for (var i = 0; i < tweets.length; i++) {
-            console.log(tweets[i].created_at + " " + tweets[i].text);
+            console.log(moment(tweets[i].created_at).format("dddd, MMMM DD, YYYY @ hh:mma") + ": " + tweets[i].text);
         };
     });
 };
@@ -44,7 +48,6 @@ function getSong() {
     spot.search({ type: "track", query: song, limit: 1 })
         .then(function (response) {
             var info = response.tracks.items[0];
-            console.log(info);
             console.log("Song name: " + info.name)
             if (info.artists.length > 1) {
                 for (var i = 0; i < info.artists.length; i++) {
@@ -67,7 +70,6 @@ function getMovie() {
         movieName = "Mr. Nobody";
     };
     request("http://www.omdbapi.com/?apikey=trilogy&t=" + movieName, function(error, response, body){
-    // console.log(body);
     console.log("Movie Title: " + JSON.parse(body).Title);
     console.log("Year Released: " + JSON.parse(body).Released);
     console.log("IMDB Rating: " + JSON.parse(body).Ratings[0].Value);
@@ -85,7 +87,12 @@ function doIt() {
         }
         console.log(data);
         var bsb = data.split(" ");
-        console.log(bsb);
-        getSong();
+        process.argv.pop();
+        for (var i = 0; i<bsb.length; i++) {
+            process.argv.push(bsb[i]);
+        };
+        readPrompts();
     });
 };
+
+readPrompts();
