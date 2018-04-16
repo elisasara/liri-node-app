@@ -3,24 +3,27 @@ var getSong = require("./spotify.js");
 var getMovie = require("./movies.js");
 // var doIt = require("./random.js");
 var fs = require("fs");
+var moment = require("moment");
 
 
 function readPrompts(){
 switch (process.argv[2]) {
     case "my-tweets":
         getTweets();
+        logIt();
         break;
 
     case "spotify-this-song":
         getSong();
-
+        logIt()
         break;
     case "movie-this":
         getMovie();
-
+        logIt();
         break;
     case "do-what-it-says":
         doIt();
+        logIt();
 };
 };
 
@@ -41,7 +44,8 @@ function doIt() {
 
 function logIt (){
     var toLog = process.argv.slice(2).join(" ");
-    fs.appendFile("log.txt", toLog, function (err) {
+    var time = moment().format("dddd, MMMM DD, YYYY @ hh:mma");
+    fs.appendFile("log.txt", time + ": " + toLog + "\r\n", function (err) {
         if (err) throw err;
         console.log("This has been logged");
     });
