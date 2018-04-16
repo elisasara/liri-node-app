@@ -39,6 +39,14 @@ function doIt() {
     });
 };
 
+function logIt (){
+    var toLog = process.argv.slice(2).join(" ");
+    fs.appendFile("log.txt", toLog, function (err) {
+        if (err) throw err;
+        console.log("This has been logged");
+    });
+};
+
 readPrompts();
 
 // module.exports = readPrompts;

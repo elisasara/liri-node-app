@@ -6,6 +6,7 @@ function getMovie() {
         movieName = "Mr. Nobody";
     };
     request("http://www.omdbapi.com/?apikey=trilogy&t=" + movieName, function(error, response, body){
+    if (error) throw error;
     console.log("Movie Title: " + JSON.parse(body).Title);
     console.log("Year Released: " + JSON.parse(body).Released);
     console.log("IMDB Rating: " + JSON.parse(body).Ratings[0].Value);
