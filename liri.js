@@ -1,3 +1,5 @@
+// Get all requirements for this file
+
 var getTweets = require("./tweets.js");
 var getSong = require("./spotify.js");
 var getMovie = require("./movies.js");
@@ -6,6 +8,7 @@ var fs = require("fs");
 var moment = require("moment");
 
 
+// Function to handle the arguments that are given through the command line
 function readPrompts(){
 switch (process.argv[2]) {
     case "my-tweets":
@@ -27,6 +30,7 @@ switch (process.argv[2]) {
 };
 };
 
+// Function to read the random.txt file -- I tried to move this into a separate file and it did not work...
 function doIt() {
     fs.readFile("random.txt", "utf8", function(err, data) {
         if (err){

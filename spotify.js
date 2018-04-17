@@ -1,9 +1,11 @@
+// Get all requirements for this component
 require("dotenv").config();
 var keys = require("./keys.js");
 var spotify = require("node-spotify-api")
 var spot = new spotify(keys.spotify);
 
-
+// Function to search for a song and display necessary information.
+// If no song is entered then it will automatically use "The Sign" by Ace of Base
 function getSong() {
     var song = process.argv.slice(3).join(" ");
     if (process.argv.length < 4) {
@@ -29,4 +31,5 @@ function getSong() {
         });
 };
 
+// Export this information for use in liri.js
 module.exports = getSong;

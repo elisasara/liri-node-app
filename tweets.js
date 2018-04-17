@@ -1,10 +1,11 @@
+// Get all requirements for this component
 require("dotenv").config();
 var keys = require("./keys.js");
 var twitter = require("twitter");
 var moment = require("moment");
 var client = new twitter(keys.twitter);
 
-
+// Function to get the last 20 tweets and display them appropriately
 function getTweets() {
     var params = { screen_name: 'Elisa_Penn18', count: 20 };
 
@@ -16,4 +17,5 @@ function getTweets() {
     });
 };
 
+// Export this information for use in liri.js
 module.exports = getTweets;
